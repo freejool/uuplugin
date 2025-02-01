@@ -18,14 +18,11 @@ RUN mkdir -p /var/lock && \
     echo 'src/gz openwrt_routing https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/routing' >> /etc/opkg/distfeeds.conf && \
     echo 'src/gz openwrt_telephony https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/telephony' >> /etc/opkg/distfeeds.conf
 
-RUN set -ex \
-    && mkdir -p /var/lock \
-    && opkg update \
-    && opkg install \
-        libustream-mbedtls \
-        ca-certificates \
-        kmod-tun \
-    && rm -rf /var/opkg-lists
+RUN opkg update && \
+opkg list-installed | grep -q libustream-openssl || opkg install libustream-openssl && \
+opkg list-installed | grep -q ca-bundle || opkg install ca-bundle && \
+opkg list-installed | grep -q kmod-tun || opkg install kmod-tun && \
+rm -rf /var/opkg-lists
 
 COPY uu_prepare /etc/init.d/uu_prepare
 RUN chmod +x /etc/init.d/uu_prepare \
