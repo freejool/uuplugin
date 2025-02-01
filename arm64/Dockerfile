@@ -10,6 +10,14 @@ ENV UU_LAN_DNS="119.29.29.29"
 
 USER root
 
+RUN mkdir -p /var/lock && \
+    echo 'src/gz openwrt_core https://downloads.openwrt.org/releases/21.02.5/targets/armvirt/64/packages' > /etc/opkg/distfeeds.conf && \
+    echo 'src/gz openwrt_base https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/base' >> /etc/opkg/distfeeds.conf && \
+    echo 'src/gz openwrt_luci https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/luci' >> /etc/opkg/distfeeds.conf && \
+    echo 'src/gz openwrt_packages https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/packages' >> /etc/opkg/distfeeds.conf && \
+    echo 'src/gz openwrt_routing https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/routing' >> /etc/opkg/distfeeds.conf && \
+    echo 'src/gz openwrt_telephony https://downloads.openwrt.org/releases/21.02.5/packages/aarch64_cortex-a53/telephony' >> /etc/opkg/distfeeds.conf
+
 RUN set -ex \
     && mkdir -p /var/lock \
     && opkg update \
