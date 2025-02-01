@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=openwrt/rootfs:x86-64-21.02.5
+ARG BASE_IMAGE=openwrt/rootfs:x86-generic-v21.02.5
 FROM ${BASE_IMAGE}
 
 LABEL maintainer="DianQK <dianqk@icloud.com>"

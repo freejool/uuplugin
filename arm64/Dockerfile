@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=openwrt/rootfs:aarch64_generic-21.02.5
+ARG BASE_IMAGE=openwrt/rootfs:aarch64_cortex-a53-v21.02.5
 FROM ${BASE_IMAGE}
 
 LABEL maintainer="DianQK <dianqk@icloud.com>"
