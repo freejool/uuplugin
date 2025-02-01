@@ -24,6 +24,13 @@ opkg list-installed | grep -q ca-bundle || opkg install ca-bundle && \
 opkg list-installed | grep -q kmod-tun || opkg install kmod-tun && \
 rm -rf /var/opkg-lists
 
+RUN opkg update && \
+    if ! opkg list-installed | grep -q libustream-openssl; then opkg install libustream-openssl || true; fi && \
+    if ! opkg list-installed | grep -q ca-bundle; then opkg install ca-bundle || true; fi && \
+    if ! opkg list-installed | grep -q kmod-tun; then opkg install kmod-tun || true; fi && \
+    rm -rf /var/opkg-lists
+
+
 COPY uu_prepare /etc/init.d/uu_prepare
 RUN chmod +x /etc/init.d/uu_prepare \
     && /etc/init.d/uu_prepare enable \
