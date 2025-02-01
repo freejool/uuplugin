@@ -18,9 +18,11 @@ jobs:
           - arch: amd64
             platform: linux/amd64
             dockerfile: ./amd64/Dockerfile
+            base_image: openwrt/rootfs:x86-64-21.02.5
           - arch: arm64
             platform: linux/arm64
             dockerfile: ./arm64/Dockerfile
+            base_image: openwrt/rootfs:aarch64_generic-21.02.5
 
     steps:
       - name: Checkout repository
