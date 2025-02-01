@@ -1,4 +1,5 @@
-FROM openwrtorg/rootfs:x86-64-19.07.6
+ARG BASE_IMAGE=openwrt/rootfs:x86-64-21.02.5
+FROM ${BASE_IMAGE}
 
 LABEL maintainer="DianQK <dianqk@icloud.com>"
 
@@ -9,19 +10,21 @@ ENV UU_LAN_DNS="119.29.29.29"
 
 USER root
 
-RUN mkdir /var/lock
-RUN opkg update
-RUN opkg install libustream-mbedtls ca-certificates kmod-tun
+RUN set -ex \
+    && mkdir -p /var/lock \
+    && opkg update \
+    && opkg install \
+        libustream-mbedtls \
+        ca-certificates \
+        kmod-tun \
+    && rm -rf /var/opkg-lists
 
-ADD uu_prepare /etc/init.d/uu_prepare
-RUN /etc/init.d/uu_prepare enable
-# 关闭 ipv6 dhcp
-RUN /etc/init.d/odhcpd disable
-# 关闭防火墙规则
-RUN /etc/init.d/firewall disable
-# 禁止访问 Web
-RUN /etc/init.d/uhttpd disable
-# 禁止 SSH 登录
-RUN /etc/init.d/dropbear disable
+COPY uu_prepare /etc/init.d/uu_prepare
+RUN chmod +x /etc/init.d/uu_prepare \
+    && /etc/init.d/uu_prepare enable \
+    && /etc/init.d/odhcpd disable \
+    && /etc/init.d/firewall disable \
+    && /etc/init.d/uhttpd disable \
+    && /etc/init.d/dropbear disable
 
 CMD ["/sbin/init"]
