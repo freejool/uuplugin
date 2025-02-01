@@ -27,8 +27,8 @@ UU 加速提供了 OpenWrt 版本的插件，见 https://router.uu.163.com/app/b
 2. 点击 "Settings" 标签
 3. 左侧菜单找到 "Secrets and variables" -> "Actions"
 4. 点击 "New repository secret"
-5. 分别添加：
-  Name: DOCKERHUB_USERNAME, Value: 你的 Docker Hub 用户名
+分别添加：
+  Name: DOCKERHUB_USERNAME, Value: 你的 Docker Hub 用户名    
   Name: DOCKERHUB_TOKEN, Value: 刚才生成的 Docker Hub token
 
 ## 环境准备
