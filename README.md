@@ -7,6 +7,30 @@ UU 加速提供了 OpenWrt 版本的插件，见 https://router.uu.163.com/app/b
 因为不同的 OpenWrt 版本对路由规则配置不同（或者别的什么），导致检测不到游戏主机连入。主要表现为主机在 UU app 中出现后立即消失。
 使用该 docker 镜像应当可以有效解决该问题。
 
+# 通过Action编译
+## 你只需要在 GitHub 仓库配置两个环境变量：
+
+1. DOCKERHUB_USERNAME: 你的 Docker Hub 用户名
+2. DOCKERHUB_TOKEN: 你的 Docker Hub 访问令牌 (Access Token)
+## 获取 Docker Hub Token 的步骤：
+
+1. 登录你的 Docker Hub 账号
+2. 点击右上角的头像 -> Account Settings
+3. 左侧菜单选择 Security
+4. 点击 "New Access Token"
+5. 给 token 起个名字（比如 "GitHub Actions"）
+6. 选择权限范围（至少需要 "Read, Write, Delete"）
+7. 点击生成，复制生成的 token
+## 在 GitHub 仓库添加这些环境变量的步骤：
+
+1. 打开你的 GitHub 仓库
+2. 点击 "Settings" 标签
+3. 左侧菜单找到 "Secrets and variables" -> "Actions"
+4. 点击 "New repository secret"
+5. 分别添加：
+  Name: DOCKERHUB_USERNAME, Value: 你的 Docker Hub 用户名
+  Name: DOCKERHUB_TOKEN, Value: 刚才生成的 Docker Hub token
+
 ## 环境准备
 
 ### 打开 IP 混杂模式
